@@ -1,0 +1,54 @@
+
+//3
+//Add the following document to the database sliit;
+> use sliit
+switched to db sliit 
+> db.sliit.insertOne({"name" : "Tharsuahn", "dateOfBirth": "1994-05-23T00:00:00Z", "subjects" : ["Application Frameworks", "Machine Learning"]})
+{
+    "acknowledged" : true,
+    "insertedId" : ObjectId("5ab7bf378d9084cc9d6e78bb")
+}
+
+//4
+//Find the document by ‘name’.
+> db.sliit.find({name :"Tharushan"}) 
+{ "_id" : ObjectId("5ab7be818d9084cc9d6e78ba"), "name" : "Tharushan", "dateOfBirth" : "1994-05-23T00:00:00Z", "subjects" : [ "Application Frameworks", "Machine Learning" ] }
+
+//5
+//Find the document by ’_id’
+>db.sliit.find(ObjectId("5ab7be818d9084cc9d6e78ba"))
+{ "_id" : ObjectId("5ab7be818d9084cc9d6e78ba"), "name" : "Tharushan", "dateOfBirth" : "1994-05-23T00:00:00Z", "subjects" : [ "Application Frameworks", "Machine Learning" ] }
+
+//6
+//Add ‘Distributed Computing’ to the subject list.
+>db.sliit.update({name:"Tharushan"}, { $push: {subjects: "Distributed Computing"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })  
+
+//7
+//Add the following 2 document to the same collection
+> db.sliit.insertMany([
+    {"name" : "Theruka", "dateOfBirth": "1994-05-23T00:00:00Z", "subjects" : ["Application Frameworks", "Machine Learning"], "isActive": true},
+    {"name" : "Theruka", "dateOfBirth": "1994-05-23T00:00:00Z", "subjects" : ["Application Frameworks", "Machine Learning"], "isActive": false}
+])
+{
+    "acknowledged" : true,
+    "insertedIds" : [
+        ObjectId("5ab7c85d8d9084cc9d6e78bd"),
+        ObjectId("5ab7c85d8d9084cc9d6e78be")
+    ]
+}
+
+//8
+//Find the document with the name ‘Smith’ and isActive flag is true and add Distributed computing to subjects.
+>db.sliit.update({name:"Theruka", isActive: true}, { $push: {subjects: "Distributed Computing"}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 }) 
+
+//9
+//Update the first document ‘isActive’ to false
+>db.sliit.update({'_id': ObjectId("5ab7c85d8d9084cc9d6e78bd")}, {$set : {isActive : false}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 }) 
+
+//10
+//Remove the first document created
+>db.sliit.remove({'_id': ObjectId("5ab7c85d8d9084cc9d6e78bd")})
+WriteResult({ "nRemoved" : 1 })
