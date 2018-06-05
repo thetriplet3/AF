@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import axios from 'axios';
-import AddUser from './controllers/User/AddUser.jsx';
+import AddUser from './components/User/AddUser.jsx';
 import Users from './components/User/Users.jsx';
 
 export default class AppContainer extends Component {
