@@ -31,11 +31,20 @@ export default class AppContainer extends Component {
             alert(err);
         })
     }
+    deleteUser(user) {
+        axios.delete(this.apiUrl, { _id: user._id }).then(result => {
+            if (result.status == 200) {
+                this.getAllUsers();
+            }
+        }).catch(err => {
+            alert(err);
+        })
+    }
     render() {
         return <div>
             <h2>Users App</h2>
             <AddUser addUser={user => this.addUser(user)} />
-            <Users users={this.state.users} />
+            <Users users={this.state.users}  getAllUsers = {() => this.getAllUsers()}/>
         </div>
     }
 }

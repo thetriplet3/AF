@@ -13,6 +13,9 @@ export default class Users extends Component {
     constructor(props) {
         super(props);
     }
+    componentWillReceiveProps(props) {
+        this.setState(props)
+    }
     render() {
         const { users } = this.props;
         return <div>
@@ -21,12 +24,13 @@ export default class Users extends Component {
                     <tr>
                         <th>Name</th>
                         <th>Address</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
                     {
                         users.map(user => {
-                            return <User key={user.id} user={user} />
+                            return <User key={user._id} user={user} getAllUsers={() => this.props.getAllUsers()} />
                         })
                     }
                 </tbody>
