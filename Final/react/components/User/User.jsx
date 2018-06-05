@@ -39,8 +39,8 @@ export default class User extends Component {
         return <tr>
             <td>{this.user.name}</td>
             <td>{this.user.address}</td>
-            <td><button onClick={(e) => this.update(this.user._id || this.user.id, this.user.name)}>Update</button></td>
-            <td><button onClick={(e) => this.delete(this.user._id || this.user.id)}>Delete</button></td>
+            <td><button onClick={(e) => this.update(this.user._id, this.user.name)}>Update</button></td>
+            <td><button onClick={(e) => this.delete(this.user._id)}>Delete</button></td>
         </tr>
     }
 }
