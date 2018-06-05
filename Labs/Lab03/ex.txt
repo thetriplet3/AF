@@ -1,0 +1,71 @@
+//3
+//Create a simple maven project with “quickstart” Maven Artifact
+mvn archetype:generate -DgroupId=com.mycompany.app -DartifactId=my-app -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
+
+//6
+//Setting up a Spring-Boot Project.
+
+<parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>1.5.2.RELEASE</version>
+</parent>
+
+<plugin>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-mavenplugin</artifactId>
+    <version>2.0.0.RELEASE</version>
+</plugin>
+
+//7
+//Modify the main class to become a Spring Boot application.
+package com.mycompany.app;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+/**
+ * Hello world!
+ *
+ */
+@SpringBootApplication
+public class App 
+{
+    public static void main( String[] args )
+    {
+        SpringApplication.run(App.class, args);
+    }
+}
+
+//8
+//Create a GET method named greeting which returns a simple String value “Hello !”
+
+//9
+//Update the method so that it accepts a query parameter named ‘name’ and returns “Hello,
+//{name}!”. Set a default value to that parameter.
+
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+public class AppController {
+
+    private static final String template = "Hello, %s!";
+
+    //8
+    @GetMapping("/get")
+    @ResponseBody
+    public String getHello() {
+        return "Hello World!";
+    }
+
+    //9
+    @GetMapping("/say")
+    @ResponseBody
+    public String sayHello(@RequestParam(name="name", required=false, defaultValue="Stranger") String name) {
+        return String.format(template, name);
+    }
+    
+
+}
