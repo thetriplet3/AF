@@ -1,6 +1,6 @@
 'use strict'
 
-var express = requrie('express');
+var express = require('express');
 var router = express.Router();
 
 var AuthorController = require('./author.controller');

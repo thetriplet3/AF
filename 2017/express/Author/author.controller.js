@@ -1,7 +1,6 @@
 'user strict'
 
-var mongoose = require('mongoose');
-
+var mongoose = require('../DBConfig/DBSchema');
 var AuthorSchema = mongoose.model('Author');
 
 exports.createAuthor = function (author) {
