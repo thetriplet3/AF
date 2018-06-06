@@ -5,6 +5,6 @@ var routes = express.Router();
 
 var AuthourRoutes = require('./Author/author.route');
 
-routes.use('/author', AuthourRoutes);
+routes.use('/author/', AuthourRoutes);
 
 module.exports = routes;
