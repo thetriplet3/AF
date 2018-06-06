@@ -12,10 +12,7 @@ var BookSchema = new Schema({
     price: { type: Number, required: true },
     year: { type: String, required: true },
     publisher: { type: String, required: true },
-    author: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Author'
-    }
+    author: { type: String, required: true }
 })
 
 var AuthorSchema = new Schema({
