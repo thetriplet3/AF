@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/books")
 public class BookService {
@@ -20,6 +21,7 @@ public class BookService {
     @Autowired
     private BookRepository bookRepository;
 
+    @CrossOrigin
     @RequestMapping(method = RequestMethod.GET)
     public List<Book> GetAllBooks() {
         List<Book> bookList = null;
@@ -32,12 +34,12 @@ public class BookService {
         }
     }
 
-    @RequestMapping(value = "/total", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public float CalculatePrice(@RequestParam(value="ids")List<String> bookIdList) {
+    @CrossOrigin
+    @RequestMapping(value = "/total", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public float CalculatePrice(@RequestBody String[] bookIdList ) {
 
         Book instance = null;
         float totalPrice = 0;
-
         try {
 
             for(String id : bookIdList) {
