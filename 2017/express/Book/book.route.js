@@ -10,7 +10,7 @@ router.get('/authors/', (req, res) => {
     BookController.getAllAuthors().then((response) => {
         res.status(response.status).send(response.data)
     }).catch((error) => {
-        res.status(error.status).send(error)
+        res.status(error.status).send(error.message)
     })
 })
 
@@ -18,15 +18,16 @@ router.get('/', (req, res) => {
     BookController.getAllBooks().then((response) => {
         res.status(response.status).send(response.data)
     }).catch((error) => {
-        res.status(error.status).send(error.data)
+        res.status(error.status).send(error.message)
     })
 })
 
 router.post('/', (req, res) => {
+    console.log(req.body);
     BookController.createBook(req.body).then((response) => {
         res.status(response.status).send(response.data)
     }).catch((error) => {
-        res.status(error.status).send(error.data)
+        res.status(error.status).send(error.message)
     })
 })
 
@@ -35,7 +36,7 @@ router.get('/:author', (req, res) => {
     BookController.getBooksByAuthor(req.params.author).then((response) => {
         res.status(response.status).send(response.data)
     }).catch((error) => {
-        res.status(error.status).send(error)
+        res.status(error.status).send(error.message)
     })
 })
 

@@ -21,7 +21,7 @@ exports.createBook = function (book) {
             })
         }).catch((err) => {
             reject({
-                status: 501,
+                status: 500,
                 message: "An error occured when creating the book : " + err
             })
         })

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import AddBook from './components/AddBook';
 import BookList from './components/BookList';
 
 const apiUrl = "http://localhost:3011/api";
@@ -11,12 +12,18 @@ class App extends Component {
     super(props);
 
     this.state = {
-      books: []
+      books: [],
+      authors: []
     }
-    this.getAllBooks();
+    this.populateData();
   }
 
-  getAllBooks() {
+  populateData = () => {
+    this.getAllBooks();
+    this.getAllAuthors();
+  }
+
+  getAllBooks = () => {
     axios.get(`${apiUrl}/books`).then((data) => {
       console.log(data.data);
       this.setState({
@@ -25,10 +32,30 @@ class App extends Component {
     })
   }
 
+  getAllAuthors = () => {
+    axios.get(`${apiUrl}/authors`).then((data) => {
+      console.log(data.data);
+      this.setState({
+        authors: data.data
+      })
+    })
+  }
+
+  addBook = (book) => {
+    axios.post(`${apiUrl}/books`, book).then((data) => {
+      if (data.status === 201) {
+        this.populateData();
+      }
+    }).catch((error) => {
+      alert(error);
+    })
+  }
+
   render() {
     return (
       <div>
         <h1>Book Home</h1>
+        <AddBook authors={this.state.authors} addBook={this.addBook} />
         <BookList books={this.state.books} />
       </div>
     );
