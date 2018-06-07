@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+
 import AddBook from './components/AddBook';
 import BookList from './components/BookList';
 
@@ -51,12 +52,20 @@ class App extends Component {
     })
   }
 
+  calculatePrice = (selectedBookIds) => {
+    axios.post(`http://localhost:3010/api/books/total`, selectedBookIds).then((data) => {
+      alert("Total : " + data.data);
+    }).catch((error) => {
+      alert(error);
+    })
+  }
+
   render() {
     return (
       <div>
         <h1>Book Home</h1>
         <AddBook authors={this.state.authors} addBook={this.addBook} />
-        <BookList books={this.state.books} />
+        <BookList books={this.state.books} route={this.Route} calculatePrice = {this.calculatePrice} />
       </div>
     );
   }
